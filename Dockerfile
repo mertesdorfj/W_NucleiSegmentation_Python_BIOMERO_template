@@ -1,6 +1,6 @@
 FROM python:3.7-slim
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Install system dependencies (required since not included in slim image)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -17,12 +17,13 @@ RUN git clone https://github.com/cytomine-uliege/Cytomine-python-client.git && \
     git checkout tags/v2.7.3 && \
     pip install --no-cache-dir . && \
     rm -r /Cytomine-python-client
-#RUN pip install --no-cache-dir cytomine-python-client==2.4.1
 
-# Install scientific Python packages first (numpy is needed by biaflows-utilities)
+# ------------------------------------------------------------------------------
+# Install Python packages for nuclei segmentation workflow
 RUN pip install --no-cache-dir \
     numpy \
-    scipy
+    scipy \
+    imageio
 
 # ------------------------------------------------------------------------------
 # Install BIAFLOWS utilities (annotation exporter, compute metrics, helpers,...)
@@ -35,16 +36,6 @@ RUN git clone https://github.com/Neubias-WG5/biaflows-utilities.git && \
 RUN chmod +x /biaflows-utilities/bin/* && \
     cp /biaflows-utilities/bin/* /usr/bin/ && \
     rm -r /biaflows-utilities
-
-# ------------------------------------------------------------------------------
-# Install Python packages for nuclei segmentation workflow
-#RUN pip install --no-cache-dir \
-#    numpy \
-#    scipy \
-#    scikit-image \
-#    imageio
-
-RUN pip install --no-cache-dir imageio
 
 # ------------------------------------------------------------------------------
 # Create app directory and add workflow files
