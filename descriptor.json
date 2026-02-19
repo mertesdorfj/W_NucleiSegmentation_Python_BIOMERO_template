@@ -1,0 +1,90 @@
+{
+  "name": "BIOMERO_container_template",
+  "description": "2D nuclei segmentation using Otsu thresholding with morphological post-processing and watershedding",
+  "container-image": {
+    "image": "jumeku/w_nuclei_segmentation",
+    "type": "singularity"
+  },
+  "command-line": "python wrapper.py CYTOMINE_HOST CYTOMINE_PUBLIC_KEY CYTOMINE_PRIVATE_KEY CYTOMINE_ID_PROJECT CYTOMINE_ID_SOFTWARE SIGMA MAX_SIZE CLOSING_RADIUS",
+  "inputs": [
+    {
+      "id": "cytomine_host",
+      "value-key": "@ID",
+      "command-line-flag": "--@id",
+      "name": "Cytomine host",
+      "set-by-server": true,
+      "optional": false,
+      "type": "String"
+    },
+    {
+      "id": "cytomine_public_key",
+      "value-key": "@ID",
+      "command-line-flag": "--@id",
+      "name": "Cytomine public key",
+      "set-by-server": true,
+      "optional": false,
+      "type": "String"
+    },
+    {
+      "id": "cytomine_private_key",
+      "value-key": "@ID",
+      "command-line-flag": "--@id",
+      "name": "Cytomine private key",
+      "set-by-server": true,
+      "optional": false,
+      "type": "String"
+    },
+    {
+      "id": "cytomine_id_project",
+      "value-key": "@ID",
+      "command-line-flag": "--@id",
+      "name": "Cytomine project ID",
+      "set-by-server": true,
+      "optional": false,
+      "type": "Number"
+    },
+    {
+      "id": "cytomine_id_software",
+      "value-key": "@ID",
+      "command-line-flag": "--@id",
+      "name": "Cytomine software ID",
+      "set-by-server": true,
+      "optional": false,
+      "type": "Number"
+    },
+   {
+      "id": "sigma",
+      "value-key": "@SIGMA",
+      "command-line-flag": "--sigma",
+      "name": "Gaussian blur sigma",
+      "description": "Standard deviation for Gaussian smoothing filter",
+      "default-value": 2.0,
+      "set-by-server": false,
+      "optional": true,
+      "type": "Number"
+   },
+   {
+      "id": "max_size",
+      "value-key": "@MAX_SIZE",
+      "command-line-flag": "--max_size",
+      "name": "Maximum debris size",
+      "description": "Remove objects with area ≤ this value in pixels (increase to filter out more debris and noise)",
+      "default-value": 200,
+      "set-by-server": false,
+      "optional": true,
+      "type": "Number"
+   },
+   {
+      "id": "closing_radius",
+      "value-key": "@CLOSING_RADIUS",
+      "command-line-flag": "--closing_radius",
+      "name": "Morphological closing radius",
+      "description": "Radius of disk structuring element for morphological closing operation (bridges small gaps between nucleus fragments)",
+      "default-value": 3,
+      "set-by-server": false,
+      "optional": true,
+      "type": "Number"
+   }],
+
+  "schema-version": "cytomine-0.1"
+}

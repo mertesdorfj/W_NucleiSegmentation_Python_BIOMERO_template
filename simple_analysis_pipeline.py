@@ -57,18 +57,18 @@ def postprocess(binary_image, max_size=200, closing_radius=3):
 
 def process_single_image(image_path, output_path, sigma=2.0, max_size=200, closing_radius=3):
     """
-    Process a single image and save the the resulting label mask.
+    Process a single image and save the resulting label mask.
     """
     # Load image and run preprocessing, segmentation and then postprocessing.
     raw_img = io.imread(image_path, as_gray=True)
     preprocessed_img = preprocess(raw_img, sigma=sigma)
     binary_img = segment(preprocessed_img)
     cleaned_img, labeled_img = postprocess(binary_img, max_size=max_size, closing_radius=closing_radius)
-    
+
     # Count and print the number of detected nuclei.
     props = measure.regionprops(labeled_img, intensity_image=raw_img)
     print(f"Nuclei detected: {len(props)}")
-    
+
     # Save resulting label mask to the specified result folder & return results
     io.imsave(output_path, labeled_img.astype(np.uint16))
     return labeled_img, props
