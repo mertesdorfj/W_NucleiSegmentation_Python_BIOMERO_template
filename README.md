@@ -18,7 +18,7 @@ A BIAFLOWS-compatible Docker container for automated nuclei segmentation in DAPI
 Create the Docker image with all depencies installed, via the following command:
 
 ```bash
-docker build -t w_nuclei_segmentation:latest .
+docker build -t w_nuclei_segmentation_python:latest .
 ```
 
 
@@ -33,12 +33,12 @@ docker run -it --rm \
   -v C:/Users/YourName/YourProject/images:/data/in \
   -v C:/Users/YourName/YourProject/results:/data/out \
   --entrypoint /bin/bash \
-  w_nuclei_segmentation:latest
+  w_nuclei_segmentation_python:latest
 ```
 
 ### 2. Run the Wrapper Inside Container
 
-Inside the interactive Docker session, you can run the script via the wrapper:
+Inside the interactive Docker session, you can run the analysis workflow via the wrapper script:
 
 ```bash
 python /app/wrapper.py \
@@ -57,7 +57,7 @@ python /app/wrapper.py \
 exit
 ```
 
-Results will be stored in your local directory indicated in the interactive session start command, e.g. in the example above `C:/Users/YourName/YourProject/results` .
+Results will be stored in your local directory indicated in the interactive session start command, e.g. in the example above: `C:/Users/YourName/YourProject/results`.
 
 
 ## Publishing to Docker Hub
@@ -65,7 +65,7 @@ Results will be stored in your local directory indicated in the interactive sess
 ### 1. Tag Your Image
 
 ```bash
-docker tag w_nuclei_segmentation:latest <dockerhub_username>/w_nuclei_segmentation:v1.0.0
+docker tag w_nuclei_segmentation_python:latest <dockerhub_username>/w_nuclei_segmentation_python:v1.0.0
 ```
 
 ### 2. Login to Docker Hub
@@ -77,5 +77,5 @@ docker login
 ### 3. Push to Docker Hub
 
 ```bash
-docker push <dockerhub_username>/w_nuclei_segmentation:v1.0.0
+docker push <dockerhub_username>/w_nuclei_segmentation_python:v1.0.0
 ```
