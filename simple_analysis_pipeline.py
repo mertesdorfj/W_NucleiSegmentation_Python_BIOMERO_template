@@ -37,7 +37,8 @@ def postprocess(binary_image, max_size=200, closing_radius=3):
     # Morphological closing and hole filling
     closed_img = morphology.closing(binary_image, morphology.disk(closing_radius))
     filled_img = ndi.binary_fill_holes(closed_img)
-    cleaned_img = morphology.remove_small_objects(filled_img, max_size=max_size)
+    #cleaned_img = morphology.remove_small_objects(filled_img, max_size=max_size)  # Newer scikit version
+    cleaned_img = morphology.remove_small_objects(filled_img, min_size=max_size)   # Older scikit version (compatible with python:3.7-slim)
 
     # Watershed segmentation to separate touching nuclei
     # 1. Calculate distance transform
