@@ -2,7 +2,7 @@
   "name": "W_NucleiSegmentation_Python_BIOMERO_template",
   "description": "2D nuclei segmentation using Otsu thresholding with morphological post-processing and watershedding",
   "container-image": {
-    "image": "jumeku/w_nuclei_segmentation_python",
+    "image": "jumeku/w_nucleisegmentation_python_biomero_template",
     "type": "singularity"
   },
   "command-line": "python wrapper.py CYTOMINE_HOST CYTOMINE_PUBLIC_KEY CYTOMINE_PRIVATE_KEY CYTOMINE_ID_PROJECT CYTOMINE_ID_SOFTWARE SIGMA MAX_SIZE CLOSING_RADIUS",
